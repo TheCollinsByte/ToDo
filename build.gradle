@@ -22,6 +22,12 @@ dependencies {
     // Common Annotations for the JavaTM Platform API
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
 
+    /*
+        API for SLF4J (The Simple Logging Facade for Java) which serves as a simple facade or abstraction for various logging frameworks,
+        allowing the end user to plug in the desired logging framework at deployment time.
+     */
+    implementation 'org.slf4j:slf4j-api:2.0.7'
+
     // Spring Boot Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
