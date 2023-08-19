@@ -28,6 +28,9 @@ dependencies {
      */
     implementation 'org.slf4j:slf4j-api:2.0.7'
 
+    // Guava is a suite of core and expanded libraries that include utility classes, Google's collections, I/O classes, and much more.
+    implementation 'com.google.guava:guava:32.1.2-jre'
+
     // Spring Boot Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
