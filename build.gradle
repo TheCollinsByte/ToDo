@@ -16,6 +16,9 @@ dependencies {
     // Spring Boot
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
+    // Sqlite JDBC is a library for accessing and creating SQLite Database files in Java (It includes native libraries)
+    implementation 'org.xerial:sqlite-jdbc:3.42.0.0'
+
     // Spring Boot Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
