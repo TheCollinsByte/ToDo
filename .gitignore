@@ -9,3 +9,6 @@ build
 
 # Sqlite Database
 todo.sqlite
+
+# Node Modules
+node_modules

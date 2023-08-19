@@ -1,0 +1,15 @@
+apply from: rootProject.file('gradle/npm.gradle')
+
+task killAnyExistingReactScriptsProcesses(type: Exec) {
+    commandLine "pkill", "-f", "-9", "react-scripts"
+    ignoreExitValue true
+}
+
+// Starts the development server (calls the corresponding script in package.json)
+task npmServeDev(type: NpmTask) {
+    // First kill any webpack processes that were left over from the last
+    // time we ran (webpack doesn't handle Ctrl+C gracefully)
+    dependsOn killAnyExistingReactScriptsProcesses
+    dependsOn npmInstall
+    args = ['run', 'start']
+}
