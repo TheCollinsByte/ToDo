@@ -19,6 +19,9 @@ dependencies {
     // Sqlite JDBC is a library for accessing and creating SQLite Database files in Java (It includes native libraries)
     implementation 'org.xerial:sqlite-jdbc:3.42.0.0'
 
+    // Common Annotations for the JavaTM Platform API
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+
     // Spring Boot Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
