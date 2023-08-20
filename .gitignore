@@ -6,3 +6,6 @@ build
 
 # Idea
 .idea/
+
+# Sqlite Database
+todo.sqlite
