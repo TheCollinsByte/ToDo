@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
-public class TaskRepository implements ITaskRepository, IDataRepository {
+public class TaskRepository implements ITaskRepository {
     private static final Logger LOG = LoggerFactory.getLogger(TaskRepository.class);
 
     private final SqliteConnection sqliteConnection;
@@ -20,43 +22,28 @@ public class TaskRepository implements ITaskRepository, IDataRepository {
         this.sqliteConnection = Preconditions.checkNotNull(sqliteConnection);
     }
 
-
     @Override
-    public void dropTableIfExists() throws SQLException {
-
-        sqliteConnection.execute(
-                """
-                        DROP TABLE IF EXISTS tasks;
-                    """
-        );
+    public String createTask() throws SQLException {
+        return "SQL Statement";
     }
 
     @Override
-    public void createTableIfExists() throws SQLException {
-        sqliteConnection.execute(
-                """
-                    
-                    CREATE TABLE IF NOT EXISTS tasks (
-                        id              INT PRIMARY KEY NOT NULL,
-                        title           VARCHAR(255)    NOT NULL,
-                        description     TEXT            NOT NULL,
-                        due_date        DATETIME,
-                        priority        VARCHAR(30),
-                        status          VARCHAR(30),
-                        category        VARCHAR(30),
-                        tags            VARCHAR(30),
-                        creation_date   DATETIME,
-                        completion_date DATETIME,
-                        userId          INT,
-                        reminders       DATETIME,
-                        comments        TEXT
-                    );
-                    
-                    """);
+    public String getTask() throws SQLException {
+        return "SQL Statement";
     }
 
     @Override
-    public String printRecords() throws SQLException {
-        return "ON PROGRESS";
+    public String getTasks() throws SQLException {
+        return "SQL Statement";
+    }
+
+    @Override
+    public String updateTask() throws SQLException {
+        return "SQL Statement";
+    }
+
+    @Override
+    public String deleteTask() throws SQLException {
+        return "SQL Statement";
     }
 }
