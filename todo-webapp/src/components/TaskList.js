@@ -3,7 +3,7 @@ export const TaskList = () => {
 
     const [tasks, setTasks] = useState([]);
 
-    export const fetchTasks = async () => {
+    const fetchTasks = async () => {
         try {
             const response = await fetch('http://localhost:8080/v1/todo/tasks');
             const data = await response.json();

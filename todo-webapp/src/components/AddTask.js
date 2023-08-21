@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {fetchTasks} from "./TaskList";
 
-export const Task = () => {
+export const AddTask = () => {
 
     const [newTask, setNewTask] = useState({ id: 0, title: '', description: '' });
 
@@ -40,11 +39,10 @@ export const Task = () => {
                                 });
 
                                 if (response.ok) {
-                                    await fetchTasks();
                                     setNewTask({id: 0, title: '', description: ''})
                                 }
                             } catch (error) {
-                                console.error('Error adding Task', error);
+                                console.error('Error adding AddTask', error);
                             }
                         }
                     }}>Add Task</button>
