@@ -20,8 +20,22 @@ public class JdbcTaskRepository implements ITaskRepository {
     private static final Logger LOG = LoggerFactory.getLogger(JdbcTaskRepository.class);
 
     @Override
-    public Task createTask(Task task) throws SQLException {
-        return task;
+    public Task createTask(Task task) {
+        String query = "INSERT INTO task (id, title, description) VALUES (?, ?, ?)";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setLong(1, task.getId());
+            statement.setString(2, task.getTitle());
+            statement.setString(3, task.getDescription());
+            statement.executeUpdate();
+
+            return task;        // Return the created task
+        } catch (SQLException e) {
+            LOG.error("SQL Exception Error:", e);
+            return null;
+        }
     }
 
     @Override
