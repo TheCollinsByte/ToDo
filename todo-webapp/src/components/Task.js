@@ -1,14 +1,16 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 export const Task = () => {
 
-    const [task, setTasks] = useState([]);
+    const [tasks, setTasks] = useState([]);
     const [newTask, setNewTask] = useState({ id: 0, title: '', description: '' });
+
 
     const fetchTasks = async () => {
         try {
             const response = await fetch('http://localhost:8080/v1/todo/tasks');
             const data = await response.json();
+            setTasks(data);
         } catch (error) {
             console.error('Error fetching tasks:', error);
         }
@@ -59,19 +61,17 @@ export const Task = () => {
                 </div>
 
                 {
-                    /*
                 <div>
                     <ul>
-                        {task.map((task) => {
-                            <li key={task.id}>
+                        {/*tasks.map((task) => {
+                            <li>
                                 <span>
                                     {task.title} - {task.description}
                                 </span>
                             </li>
-                        })}
+                        })*/}
                     </ul>
                 </div>
-                     */
                 }
             </div>
         </div>
