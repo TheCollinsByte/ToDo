@@ -1,12 +1,9 @@
 package dev.collin.todo.repository;
 
-import com.google.common.base.Preconditions;
 import dev.collin.todo.config.DatabaseConnection;
 import dev.collin.todo.model.Task;
-import org.apache.logging.log4j.message.ReusableMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -17,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcTaskRepository implements ITaskRepository {
-    private static final Logger LOG = LoggerFactory.getLogger(JdbcTaskRepository.class);
+public class TaskRepository implements ITaskRepository {
+    private static final Logger LOG = LoggerFactory.getLogger(TaskRepository.class);
 
     @Override
     public Task createTask(Task task) {
