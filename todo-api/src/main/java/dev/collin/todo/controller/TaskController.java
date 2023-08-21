@@ -1,5 +1,6 @@
 package dev.collin.todo.controller;
 
+import dev.collin.todo.model.Task;
 import dev.collin.todo.repository.ITaskRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,13 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.SQLException;
+import java.util.List;
+
 @RestController
 @RequestMapping("/v1/todo")
 public class TaskController {
 
     private static final Logger LOG = LoggerFactory.getLogger(TaskController.class);
 
-    @Autowired private ITaskRepository TaskRepository;
+    @Autowired private ITaskRepository JdbcTaskRepository;
 
     @RequestMapping(path = "task", method = RequestMethod.POST)
     public ResponseEntity<String> createTask() {
@@ -26,14 +30,9 @@ public class TaskController {
     }
 
     @RequestMapping(path = "tasks", method = RequestMethod.GET)
-    public ResponseEntity<String> getTasks() {
+    public List<Task> getTasks() throws SQLException {
 
-        try {
-            String res = TaskRepository.getTasks();
-            return ResponseEntity.ok(res);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
+        return JdbcTaskRepository.getAllTask();
     }
 
     @RequestMapping(path = "task/{id}", method = RequestMethod.GET)
