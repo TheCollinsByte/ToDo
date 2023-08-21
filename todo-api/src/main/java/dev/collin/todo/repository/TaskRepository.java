@@ -28,13 +28,12 @@ public class TaskRepository implements ITaskRepository {
 
     @Override
     public Task createTask(Task task) {
-        String query = "INSERT INTO task (id, title, description) VALUES (?, ?, ?)";
+        String query = "INSERT INTO task (title, description) VALUES (?, ?)";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
 
-            statement.setLong(1, task.getId());
-            statement.setString(2, task.getTitle());
-            statement.setString(3, task.getDescription());
+            statement.setString(1, task.getTitle());
+            statement.setString(2, task.getDescription());
             statement.executeUpdate();
 
             return task;        // Return the created task
