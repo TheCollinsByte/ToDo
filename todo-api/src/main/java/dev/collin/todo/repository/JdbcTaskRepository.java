@@ -72,7 +72,7 @@ public class JdbcTaskRepository implements ITaskRepository {
     @Override
     public Task updateTask(Task task) throws SQLException {
 
-        String query = "UPDATE tasks SET title = ?, description = ? WHERE id = ?";
+        String query = "UPDATE task SET title = ?, description = ? WHERE id = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
