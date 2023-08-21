@@ -3,6 +3,7 @@ package dev.collin.todo.repository;
 import com.google.common.base.Preconditions;
 import dev.collin.todo.config.DatabaseConnection;
 import dev.collin.todo.model.Task;
+import org.apache.logging.log4j.message.ReusableMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +67,28 @@ public class JdbcTaskRepository implements ITaskRepository {
 
     @Override
     public Task getTaskById(Long id) throws SQLException {
-        return null;
+        String query = "SELECT * FROM task WHERE id = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setLong(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    Task task = new Task();
+                    task.setId(resultSet.getLong("id"));
+                    task.setTitle(resultSet.getString("title"));
+                    task.setDescription(resultSet.getString("description"));
+                    return task;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;    // No task found
     }
 
     @Override
