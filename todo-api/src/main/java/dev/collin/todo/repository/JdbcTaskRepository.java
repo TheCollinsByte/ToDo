@@ -9,23 +9,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class TaskRepository implements ITaskRepository {
-    private static final Logger LOG = LoggerFactory.getLogger(TaskRepository.class);
+public class JdbcTaskRepository implements ITaskRepository {
+    private static final Logger LOG = LoggerFactory.getLogger(JdbcTaskRepository.class);
 
     private final SqliteConnection sqliteConnection;
 
     @Autowired
-    public TaskRepository(SqliteConnection sqliteConnection) {
+    public JdbcTaskRepository(SqliteConnection sqliteConnection) {
         this.sqliteConnection = Preconditions.checkNotNull(sqliteConnection);
     }
 
     @Override
     public Task createTask(Task task) throws SQLException {
-        return null;
+        sqliteConnection.execute("INSERT INTO tasks(title) VALUES(?)");
+        return task;
     }
 
     @Override
