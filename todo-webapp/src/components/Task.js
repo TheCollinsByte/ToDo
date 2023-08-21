@@ -1,20 +1,10 @@
 import React, {useEffect, useState} from "react";
+import {fetchTasks} from "./TaskList";
 
 export const Task = () => {
 
-    const [tasks, setTasks] = useState([]);
     const [newTask, setNewTask] = useState({ id: 0, title: '', description: '' });
 
-
-    const fetchTasks = async () => {
-        try {
-            const response = await fetch('http://localhost:8080/v1/todo/tasks');
-            const data = await response.json();
-            setTasks(data);
-        } catch (error) {
-            console.error('Error fetching tasks:', error);
-        }
-    };
 
     return (
         <div>
@@ -59,20 +49,6 @@ export const Task = () => {
                         }
                     }}>Add Task</button>
                 </div>
-
-                {
-                <div>
-                    <ul>
-                        {/*tasks.map((task) => {
-                            <li>
-                                <span>
-                                    {task.title} - {task.description}
-                                </span>
-                            </li>
-                        })*/}
-                    </ul>
-                </div>
-                }
             </div>
         </div>
     )
