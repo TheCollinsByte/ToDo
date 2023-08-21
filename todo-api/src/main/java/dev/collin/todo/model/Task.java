@@ -1,5 +1,7 @@
 package dev.collin.todo.model;
 
+import org.springframework.stereotype.Component;
+
 import java.sql.Time;
 import java.time.Instant;
 
@@ -31,6 +33,7 @@ import java.time.Instant;
  * Comments/Discussions:
  *     If your application supports task discussions, you might want to include a field to store comments or discussions related to the task.
  */
+@Component
 public class Task {
     private Long id;
 
