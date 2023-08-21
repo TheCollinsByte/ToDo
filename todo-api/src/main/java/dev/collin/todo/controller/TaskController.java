@@ -43,9 +43,9 @@ public class TaskController {
     }
 
     @RequestMapping(path = "task/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<String> updateTask(@PathVariable int id) {
-
-        return ResponseEntity.ok("OK");
+    public Task updateTask(@PathVariable long id, @RequestBody Task task) throws SQLException {
+        task.setId(id);
+        return JdbcTaskRepository.updateTask(task);
     }
 
     @RequestMapping(path = "task/{id}", method = RequestMethod.DELETE)

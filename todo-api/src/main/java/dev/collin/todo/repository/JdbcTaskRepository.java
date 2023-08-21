@@ -70,8 +70,23 @@ public class JdbcTaskRepository implements ITaskRepository {
     }
 
     @Override
-    public Task updateTask(Long id, Task task) throws SQLException {
-        return null;
+    public Task updateTask(Task task) throws SQLException {
+
+        String query = "UPDATE tasks SET title = ?, description = ? WHERE id = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, task.getTitle());
+            statement.setString(2, task.getDescription());
+            statement.setLong(3, task.getId());
+            statement.executeUpdate();
+
+            return task;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
