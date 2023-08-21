@@ -1,5 +1,6 @@
 package dev.collin.todo.config;
 
+import dev.collin.todo.model.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -43,11 +44,13 @@ public class SqliteConnection implements Closeable {
     /** For Testing **/
     public SqliteConnection(Path dbPath) throws SQLException {
         this.connection = getConnection(dbPath);
+        LOG.info("SQLITE Database Connection Established (Test)");
     }
 
     /** For Spring. */
     public SqliteConnection() throws SQLException {
         this.connection = getConnection(Path.of("todo.sqlite"));
+        LOG.info("SQLITE Database Connection Established (Spring)");
     }
 
     public void execute(String sql) throws SQLException {
