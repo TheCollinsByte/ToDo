@@ -34,7 +34,7 @@ public class JdbcTaskRepository implements ITaskRepository {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery()) {
 
-            while (resultSet.next()) {
+            while (resultSet.next()) {  // Iterate through each row in the result set
                 Task task = new Task();
                 task.setId(resultSet.getLong("id"));
                 task.setTitle(resultSet.getString("title"));
