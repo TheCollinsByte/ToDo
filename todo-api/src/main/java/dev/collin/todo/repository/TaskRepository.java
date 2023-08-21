@@ -4,6 +4,7 @@ import dev.collin.todo.config.DatabaseConnection;
 import dev.collin.todo.model.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -16,6 +17,13 @@ import java.util.List;
 @Component
 public class TaskRepository implements ITaskRepository {
     private static final Logger LOG = LoggerFactory.getLogger(TaskRepository.class);
+
+    Task task;
+
+    @Autowired
+    public TaskRepository(Task task) {
+        this.task = task;
+    }
 
     @Override
     public Task createTask(Task task) {
@@ -47,7 +55,6 @@ public class TaskRepository implements ITaskRepository {
             ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {  // Iterate through each row in the result set
-                Task task = new Task();
                 task.setId(resultSet.getLong("id"));
                 task.setTitle(resultSet.getString("title"));
                 task.setDescription(resultSet.getString("description"));
@@ -72,7 +79,6 @@ public class TaskRepository implements ITaskRepository {
             statement.setLong(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    Task task = new Task();
                     task.setId(resultSet.getLong("id"));
                     task.setTitle(resultSet.getString("title"));
                     task.setDescription(resultSet.getString("description"));
