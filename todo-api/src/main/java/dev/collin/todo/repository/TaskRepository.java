@@ -19,6 +19,7 @@ public class TaskRepository implements ITaskRepository {
     private static final Logger LOG = LoggerFactory.getLogger(TaskRepository.class);
 
     Task task;
+    Connection connection = DatabaseConnection.getConnection();
 
     @Autowired
     public TaskRepository(Task task) {
@@ -29,8 +30,7 @@ public class TaskRepository implements ITaskRepository {
     public Task createTask(Task task) {
         String query = "INSERT INTO task (id, title, description) VALUES (?, ?, ?)";
 
-        try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setLong(1, task.getId());
             statement.setString(2, task.getTitle());
@@ -49,9 +49,7 @@ public class TaskRepository implements ITaskRepository {
         List<Task> tasks = new ArrayList<>();
         String query = "SELECT * FROM task";
 
-        try (
-            Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(query);
+        try (PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {  // Iterate through each row in the result set
@@ -73,8 +71,7 @@ public class TaskRepository implements ITaskRepository {
     public Task getTaskById(Long id) throws SQLException {
         String query = "SELECT * FROM task WHERE id = ?";
 
-        try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setLong(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -99,8 +96,7 @@ public class TaskRepository implements ITaskRepository {
 
         String query = "UPDATE task SET title = ?, description = ? WHERE id = ?";
 
-        try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setString(1, task.getTitle());
             statement.setString(2, task.getDescription());
