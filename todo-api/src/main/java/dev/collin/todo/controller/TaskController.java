@@ -2,6 +2,7 @@ package dev.collin.todo.controller;
 
 import dev.collin.todo.model.Task;
 import dev.collin.todo.repository.ITaskRepository;
+import dev.collin.todo.repository.JdbcTaskRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,15 @@ public class TaskController {
     }
 
     @RequestMapping(path = "task/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteTask(@PathVariable int id) {
+    public ResponseEntity<String> deleteTask(@PathVariable long id) {
 
-        return ResponseEntity.ok("OK");
+        try {
+            JdbcTaskRepository.deleteTask(id);
+            return ResponseEntity.ok("OK: Task Delete");
+        } catch (SQLException e) {
+            LOG.error("SQL Exception", e);
+        }
+
+        return ResponseEntity.ok("FAIL: Task Not Deleted");
     }
 }
