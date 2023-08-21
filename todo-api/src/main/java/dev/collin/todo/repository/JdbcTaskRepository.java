@@ -29,17 +29,20 @@ public class JdbcTaskRepository implements ITaskRepository {
         List<Task> tasks = new ArrayList<>();
         String query = "SELECT * FROM task";
 
-        try {
+        try (
             Connection connection = DatabaseConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery()) {
+
             while (resultSet.next()) {
                 Task task = new Task();
                 task.setId(resultSet.getLong("id"));
                 task.setTitle(resultSet.getString("title"));
                 task.setDescription(resultSet.getString("description"));
+
                 tasks.add(task);
             }
+
         } catch (SQLException e) {
             LOG.error("SQL Exception:", e);
         }
