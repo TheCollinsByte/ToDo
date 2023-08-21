@@ -2,6 +2,7 @@ package dev.collin.todo.repository;
 
 import com.google.common.base.Preconditions;
 import dev.collin.todo.config.SqliteConnection;
+import dev.collin.todo.model.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,27 +24,27 @@ public class TaskRepository implements ITaskRepository {
     }
 
     @Override
-    public String createTask() throws SQLException {
-        return "SQL Statement";
+    public Task createTask(Task task) throws SQLException {
+        return null;
     }
 
     @Override
-    public String getTask() throws SQLException {
-        return "SQL Statement";
+    public List<Task> getAllTask() throws SQLException {
+        return null;
     }
 
     @Override
-    public String getTasks() throws SQLException {
-        return "SQL Statement";
+    public Task getTaskById(Long id) throws SQLException {
+        return null;
     }
 
     @Override
-    public String updateTask() throws SQLException {
-        return "SQL Statement";
+    public Task updateTask(Long id, Task task) throws SQLException {
+        return null;
     }
 
     @Override
-    public String deleteTask() throws SQLException {
-        return "SQL Statement";
+    public void deleteTask(Long id) throws SQLException {
+
     }
 }
