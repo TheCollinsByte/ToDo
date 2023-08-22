@@ -4,7 +4,7 @@ import {TaskList} from "./TaskList";
 function App () {
     return (
        <div>
-           <h1>TO-Do Web App</h1>
+           <h1 style={{textAlign: "center", color: "blue"}}>TO-Do Web App</h1>
            <AddTask />
            <TaskList />
        </div>
