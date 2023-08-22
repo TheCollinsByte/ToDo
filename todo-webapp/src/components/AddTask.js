@@ -2,33 +2,31 @@ import React, {useEffect, useState} from "react";
 
 export const AddTask = () => {
 
-    const [newTask, setNewTask] = useState({ id: 0, title: '', description: '' });
-
+    const [newTask, setNewTask] = useState({ title: '', description: '' });
 
     return (
-        <div>
-            <div>
+        <div style={{textAlign: "center"}}>
                 <div>
                     <input
-                        type="number"
-                        placeholder="Id"
-                        value={newTask.id}
-                        onChange={(e) => setNewTask({ ...newTask, id: parseInt(e.target.value) })}
-                    />
-                    <input
                         type="text"
-                        placeholder="Title"
+                        placeholder="Task Title"
                         value={newTask.title}
                         onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
                     />
+                    <br />
+                    <br />
                     <input
                         type="text"
-                        placeholder="Title"
+                        placeholder="Task Description"
                         value={newTask.description}
                         onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
                     />
+                </div>
+                <br />
+                <br />
+                <div>
                     <button onClick={async () => {
-                        if (newTask.title.trim() !== '' && newTask.description.trim() !== '' && newTask.id !== (0.0 && 0)) {
+                        if (newTask.title.trim() !== '' && newTask.description.trim() !== '') {
                             try {
                                 const response = await fetch('http://localhost:8080/v1/todo/task', {
                                     method: 'POST',
@@ -39,7 +37,7 @@ export const AddTask = () => {
                                 });
 
                                 if (response.ok) {
-                                    setNewTask({id: 0, title: '', description: ''})
+                                    setNewTask({title: '', description: ''})
                                 }
                             } catch (error) {
                                 console.error('Error adding AddTask', error);
@@ -47,7 +45,6 @@ export const AddTask = () => {
                         }
                     }}>Add Task</button>
                 </div>
-            </div>
         </div>
     )
 }
