@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 
-export const AddTask = () => {
+export const TaskForm = () => {
 
     const [newTask, setNewTask] = useState({ title: '', description: '' });
 
@@ -40,8 +40,10 @@ export const AddTask = () => {
                                     setNewTask({title: '', description: ''})
                                 }
                             } catch (error) {
-                                console.error('Error adding AddTask', error);
+                                console.error('Error adding TaskForm', error);
                             }
+                        } else {
+                            alert("Enter a Task");
                         }
                     }}>Add Task</button>
                 </div>
