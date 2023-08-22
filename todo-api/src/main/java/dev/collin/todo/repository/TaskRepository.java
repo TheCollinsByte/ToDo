@@ -18,13 +18,7 @@ import java.util.List;
 public class TaskRepository implements ITaskRepository {
     private static final Logger LOG = LoggerFactory.getLogger(TaskRepository.class);
 
-    Task task;
     Connection connection = DatabaseConnection.getConnection();
-
-    @Autowired
-    public TaskRepository(Task task) {
-        this.task = task;
-    }
 
     @Override
     public Task createTask(Task task) {
@@ -52,12 +46,15 @@ public class TaskRepository implements ITaskRepository {
             ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {  // Iterate through each row in the result set
+                Task task = new Task();
                 task.setId(resultSet.getLong("id"));
                 task.setTitle(resultSet.getString("title"));
                 task.setDescription(resultSet.getString("description"));
 
                 tasks.add(task);
             }
+
+            LOG.info(tasks.toString());
 
         } catch (SQLException e) {
             LOG.error("SQL Exception:", e);
@@ -74,6 +71,7 @@ public class TaskRepository implements ITaskRepository {
 
             statement.setLong(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
+                Task task = new Task();
                 if (resultSet.next()) {
                     task.setId(resultSet.getLong("id"));
                     task.setTitle(resultSet.getString("title"));
