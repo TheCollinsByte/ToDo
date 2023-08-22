@@ -16,10 +16,21 @@ export const TaskList = () => {
 
     return (
         <div>
-            <h1>Tasks</h1>
-            {tasks.map((e) => {
-                console.log(e)
-            })}
+            <ul>
+                {tasks.map((task) => (
+                    <li key={task.id}>
+                        <input
+                            type="checkbox"
+                            checked={false}
+                            onChange={() => console.log("Input Checkbox")}
+                        />
+                        <span>
+                          {task.title} - {task.description}
+                        </span>
+                        <button onClick={() => console.log("Delete Button")}>Delete</button>
+                    </li>
+                ))}
+            </ul>
         </div>
     )
 }
