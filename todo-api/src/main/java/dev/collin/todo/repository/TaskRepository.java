@@ -111,8 +111,7 @@ public class TaskRepository implements ITaskRepository {
     public void deleteTask(Long id) throws SQLException {
         String query = "DELETE FROM task WHERE id = ?";
 
-        try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
