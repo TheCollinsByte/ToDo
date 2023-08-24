@@ -4,16 +4,16 @@ export const TaskList = ({ tasks, toggleTask, deleteTask }) => {
         <div>
             <ul>
                 {tasks.map((task) => (
-                    <li key={task.title}>
+                    <li key={task.id}>
                         <input
                             type="checkbox"
-                            checked={false}
-                            onChange={() => toggleTask}
+                            checked={task.completed}
+                            onChange={() => toggleTask(task.id)}
                         />
                         <span>
                           {task.title} - {task.description}
                         </span>
-                        <button onClick={() => deleteTask}>Delete</button>
+                        <button onClick={() => deleteTask(task.id)}>Delete</button>
                     </li>
                 ))}
             </ul>
