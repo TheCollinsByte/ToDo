@@ -13,7 +13,7 @@ export const TodoList = () => {
                 setTasks(data);
             }
         });
-    }, []);
+    }, [tasks]);
 
     const fetchTasks = async () => {
         try {
