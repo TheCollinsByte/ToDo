@@ -11,3 +11,4 @@ rootProject.name = 'ToDo'
 
 include 'todo-api'
 include 'todo-webapp'
+include 'todo_mobile'
